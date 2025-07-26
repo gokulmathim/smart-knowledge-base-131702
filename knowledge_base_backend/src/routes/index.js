@@ -6,6 +6,7 @@ const articleRoutes = require('./article');
 const authRoutes = require('./auth');
 const questionRoutes = require('./question');
 const metaRoutes = require('./meta');
+const aiSearchRoutes = require('./ai_search');
 
 const router = express.Router();
 
@@ -15,5 +16,6 @@ router.use('/articles', articleRoutes);
 router.use('/auth', authRoutes);
 router.use('/questions', questionRoutes);
 router.use('/meta', metaRoutes);
+router.use('/ai-search', aiSearchRoutes);
 
 module.exports = router;
