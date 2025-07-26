@@ -14,8 +14,9 @@ sequelize.authenticate()
   .then(() => console.log('DB authenticated'))
   .catch((err) => console.error('DB auth failed:', err));
 
+const corsOrigin = process.env.FRONTEND_URL || '*';
 app.use(cors({
-  origin: '*',
+  origin: corsOrigin,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
