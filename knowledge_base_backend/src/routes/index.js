@@ -7,6 +7,7 @@ const authRoutes = require('./auth');
 const questionRoutes = require('./question');
 const metaRoutes = require('./meta');
 const aiSearchRoutes = require('./ai_search');
+const userRoutes = require('./user');  // <--- Added
 
 const router = express.Router();
 
@@ -17,5 +18,6 @@ router.use('/auth', authRoutes);
 router.use('/questions', questionRoutes);
 router.use('/meta', metaRoutes);
 router.use('/ai-search', aiSearchRoutes);
+router.use('/', userRoutes); // <--- Add user endpoints to root (for /profile, /users/:id, etc)
 
 module.exports = router;
