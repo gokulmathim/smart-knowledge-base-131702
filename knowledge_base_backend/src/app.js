@@ -3,9 +3,16 @@ const express = require('express');
 const routes = require('./routes');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('../swagger');
+const { sequelize } = require('./models');
+const { errorHandler } = require('./middleware');
 
 // Initialize express app
 const app = express();
+
+// Initialize DB connection
+sequelize.authenticate()
+  .then(() => console.log('DB authenticated'))
+  .catch((err) => console.error('DB auth failed:', err));
 
 app.use(cors({
   origin: '*',
@@ -44,13 +51,7 @@ app.use(express.json());
 // Mount routes
 app.use('/', routes);
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({
-    status: 'error',
-    message: 'Internal Server Error',
-  });
-});
+// Error handling middleware (including validation, DB, and custom errors)
+app.use(errorHandler);
 
 module.exports = app;
